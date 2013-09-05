@@ -5,18 +5,12 @@ public class MakeCode{
 	{
 		if(c.length()!=4)
 		{
-			System.out.println("Wrong length\n");
 			return false;
 		}
 		for(int i=0; i<4; i++)
 		{
-			if(c.charAt(i)>alfSize+47 || c.charAt(i)<0+47)
+			if(c.charAt(i)>alfSize+91 || c.charAt(i)<65)
 			{
-				System.out.println(i);
-				
-				System.out.println(c.charAt(i));
-				
-				System.out.println("Wrong character\n");
 				return false;
 			}
 		}
