@@ -1,41 +1,62 @@
 import java.util.*;
+import java.io.Console;
 public class MakeCode{
-	public bool isCodeValid(String c)
+	public boolean isCodeValid(String c)
 	{
-		if(c.length()!=3)
+		if(c.length()!=4)
 		{
+			System.out.println("Wrong length\n");
 			return false;
 		}
 		for(int i=0; i<4; i++)
 		{
-			if(c[i]>alfSize || c[i]<0)
+			if(c.charAt(i)>alfSize+47 || c.charAt(i)<0+47)
 			{
+				System.out.println(i);
+				
+				System.out.println(c.charAt(i));
+				
+				System.out.println("Wrong character\n");
 				return false;
 			}
 		}
 		return true;
 	}
-	public void setCode();
-	{
-		Console console = System.console();
-		do{
-			System.out.println("Enter code: ");
-			String thing = new String(console.readPassword());
-		}while(isCodeValid(thing));
+	private static String readCode( ) {
+	    Console console = System.console( );
+	    System.out.println("Enter code:");
+	    return new String(console.readPassword( ));
 	}
-	public bool compCode(String guess)
+	public void setCode()
+	{
+		String thing;
+		do{
+			thing = readCode();
+		}while(!isCodeValid(thing));
+		code=thing;
+	}
+	public void printCode()
+	{
+		System.out.println(code);
+	}
+	public boolean compCode(String guess)
 	{
 		return code.equals(guess);
 	}
 	public void setAlf()
 	{
-		Scanner in = new Scanner();
+		Scanner in = new Scanner(System.in);
 		int size;
 		System.out.println("How large is your alphabet?\n");
 		do{
-			size=in.next();
+			size=in.nextInt();
 		}while(size<1 || size>26);
 		alfSize=size;
+	}
+	public MakeCode()
+	{
+		alfSize=0;
+		code="";
 	}
 	//Data
 	private int alfSize;
