@@ -3,6 +3,12 @@ Classes
 		hold and define acceptable alphabet (static variable)
 		has a string for the code itself
 		do code comparison
+			have function that returns number of characters in the right position and hold that value in a private Variable
+			Have another compare function that returns the number of characters geussed in the actual code
+			Have a last compare function that checks for a correct answer
+		Input Validation
+		constructor
+			allocates memory for array
 	board
 		holds the number of rounds
 		increments rounds
