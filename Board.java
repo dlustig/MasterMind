@@ -1,26 +1,26 @@
 import java.util.*;
 public class Board{
 	public static void main(String args[]){
-		CodeR CorrectCodeR = new CodeR();
+		Code CorrectCode = new Code();
 		getRounds();
-		CorrectCodeR.setAlf();
-		CorrectCodeR.setCodeR(1);
-//		CorrectCodeR.printCodeR();
+		CorrectCode.setAlf();
+		CorrectCode.setCode(1);
+//		CorrectCode.printCode();
 		boolean won = false;
 		int onRound=0;
-		CodeR GuessCodeR = new CodeR();
+		Code GuessCode = new Code();
 		System.out.println("Start guessing!");
 		while(won==false && onRound<numRounds)
 		{
-			GuessCodeR.setCodeR(2);
-			won=CorrectCodeR.compareCodeR(GuessCodeR);
+			GuessCode.setCode(2);
+			won=CorrectCode.compareCode(GuessCode);
 			onRound++;
 		}
 		if(won==true)
 		{
-			System.out.println("CodeRbreaker wins!");
+			System.out.println("Codebreaker wins!");
 		} else {
-			System.out.println("CodeRmaker wins!");
+			System.out.println("Codemaker wins!");
 		}
 	}
 	private static int numRounds;
@@ -37,20 +37,20 @@ scrap all that
 game begins
 Board calls "getAlfSize" on code
 Board calls "getRounds" and stores the int in "numRounds"
-Board creates a code object and names it "CorrectCodeR"
-Board calls "inputCodeRSecret" on "CorrectCodeR", giving it a value
-	function "inputCodeRSecret" has input validation (assume validation function)
+Board creates a code object and names it "CorrectCode"
+Board calls "inputCodeSecret" on "CorrectCode", giving it a value
+	function "inputCodeSecret" has input validation (assume validation function)
 Board sets boolean "won" to false
 Board sets "onRound" to zero
 while(won==false && onRound < numRounds)
-	accept input and put it in "GuessCodeR"
-	call "compareCodeR" on "CorrectCodeR" with "GuessCodeR" as argument
-		"compareCodeR" prints string of form "x correct y in puzzle"
-		"compareCodeR" returns a boolean which is true if "GuessCodeR" is the same as "CorrectCodeR"
-	make "won" equal to output of "compareCodeR"
+	accept input and put it in "GuessCode"
+	call "compareCode" on "CorrectCode" with "GuessCode" as argument
+		"compareCode" prints string of form "x correct y in puzzle"
+		"compareCode" returns a boolean which is true if "GuessCode" is the same as "CorrectCode"
+	make "won" equal to output of "compareCode"
 	increment "onRound"
 if(won==true)
-	print "CodeRbreaker wins!"
+	print "Codebreaker wins!"
 else
-	print "CodeRmaker wins!"
+	print "Codemaker wins!"
 */
