@@ -7,148 +7,62 @@ import java.awt.event.*;
 public class MasterGUI extends JFrame
 {
 
+	final static Font TEXT_FONT = new Font("arial",Font.BOLD,16);
+	final static Font MESSAGE_FONT = new Font("arial",Font.BOLD,12);
+
 	JTextField guessBox = new JTextField(5);
 	JButton submit = new JButton("Guess!");
+	MasterMindBoard graphic;
 
-	public MasterGUI()
+	public MasterGUI(int numGuesses)
 	{
 		super("MasterMind");
+
+		//layouts for the window and the menu-panel
 		BorderLayout org = new BorderLayout();
-		BorderLayout org2 = new BorderLayout();
+		FlowLayout org2 = new FlowLayout();
+
+
+		//sets up the top menu
 		JPanel menu = new JPanel();
-		setLayout(org);
 		menu.setLayout(org2);
+		guessBox.setSize(new Dimension(200,50));
+		guessBox.setFont(textFont);
+		submit.setSize(new Dimension(200,50));
+		submit.setFont(textFont);
 		menu.add(guessBox,BorderLayout.NORTH);
 		menu.add(submit,BorderLayout.SOUTH);
+
+		graphic = new MasterMindBoard(numGuesses);
+
+		//sets the values for the window
+		setLayout(org);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setSize(400,600);
 		add(menu,BorderLayout.NORTH);
 		//add(guessBox);
-		MasterMindBoard graphic = new MasterMindBoard();
 		add(graphic);
 		setVisible(true);
 	}
 
+	public void submitFeedback(String guess, int numRight, int numClose)
+	{
+		graphic.registerGuess(guess,numRight,numClose);
+		guessBox.setText("");
+	}
+
 	public static void main(String[] args)
 	{
-		MasterGUI obj = new MasterGUI();
+		MasterGUI obj = new MasterGUI(8);
 		while(true)
 		{
+			for(int x = 0; x<10000;x++)
+			{
+				System.out.println(".");
+			}
+			obj.submitFeedback("ADCA",1,2);
 			obj.repaint();
 		}
-	}
-}
-
-class MasterMindBoard extends JPanel
-{
-	final static int FIRST_ROW_OFFSET = 25;
-	final static int SIDE_OFFSET = 35;
-	final static int RESULTS_OFFSET = 6;
-
-	private boolean gameOver = false;
-	private int numGuesses = 26;
-	private int rowSpace = 425 / numGuesses;
-	private ArrayList<String> prevGuesses = new ArrayList<String>();
-	private int[] numCorrect = new int[numGuesses];
-	private int[] numClose = new int [numGuesses];
-	private String correctGuess = "ABCD";
-
-	final static Color boardColor = new Color(100,150,150);
-	final static Color holeColor = new Color(10,10,10);
-	final static Color guessedCode = new Color(200,50,25);
-
-	public MasterMindBoard()
-	{
-		prevGuesses.add("ABCD");
-		prevGuesses.add("DVBA");
-		prevGuesses.add("ADDA");
-		numCorrect[0] = 1;
-		numCorrect[1] = 0;
-		numCorrect[2] = 2;
-		numClose[0] = 1;
-		numClose[1] = 2;
-		numClose[2] = 2;
-		gameOver = true;
-	}
-
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		drawBoard(g,50,50);
-	}
-
-	private void drawBoard(Graphics g, int xOffset, int yOffset)
-	{
-		//g.offset(xOffset,yOffset);
-		g.setColor(boardColor);
-		g.fillRect(0,0,200,500);
-		int x = 30;
-		int y = 30;
-		for(int row = 0; row < numGuesses; row++)
-		{
-			if(row < prevGuesses.size())
-			{
-				paintGuess(g,x,y+row*rowSpace,prevGuesses.get(row));
-			}
-			else
-			{
-				paintNonGuess(g,x,y+row*rowSpace);
-			}
-			paintResults(g, x + 4*SIDE_OFFSET, y + row*rowSpace - 3,numCorrect[row],numClose[row]);
-		}
-
-		g.setColor(Color.GREEN);
-		g.fillRect(x-10,500 - (int)(1.5 * y), 130,y);
-
-		if(gameOver)
-		{
-			paintGuess(g,x,500-y,correctGuess);
-		}
-		else
-		{
-			paintGuess(g,x,500-y,"????");
-		}
-
-	}
-
-	private void paintNonGuess(Graphics g, int xOffset, int yOffset)
-	{
-		g.setColor(holeColor);
-		for(int count = 0; count < 4; count++)
-		{
-			g.fillArc(xOffset + count*SIDE_OFFSET - 6,yOffset - 6,12,12,0,360);
-		}
-	}
-
-	private void paintGuess(Graphics g, int xOffset, int yOffset, String code)
-	{
-		g.setColor(guessedCode);
-		g.setFont(new Font("arial",Font.BOLD,16));
-		for(int count = 0; count < 4 && count < code.length(); count++)
-		{
-			g.drawString("" + code.charAt(count),xOffset + count*SIDE_OFFSET - 5,yOffset + 5);
-		}
-	}
-
-	private void paintResults(Graphics g, int xOffset, int yOffset, int numCorrect, int numClose)
-	{
-		g.setColor(getColor(numCorrect,numClose,1));
-		g.fillArc(xOffset - 3,yOffset - 3,6,6,0,360);
-		g.setColor(getColor(numCorrect,numClose,2));
-		g.fillArc(xOffset + RESULTS_OFFSET - 3,yOffset - 3,6,6,0,360);
-		g.setColor(getColor(numCorrect,numClose,3));
-		g.fillArc(xOffset - 3,yOffset + RESULTS_OFFSET - 3,6,6,0,360);
-		g.setColor(getColor(numCorrect,numClose,4));
-		g.fillArc(xOffset + RESULTS_OFFSET - 3,yOffset + RESULTS_OFFSET - 3,6,6,0,360);
-	}
-
-	private Color getColor(int numRight, int numClose, int numPeg)
-	{
-		if(numPeg <= numRight)
-			return Color.RED;
-		if(numPeg <= numRight + numClose)
-			return Color.WHITE;
-		return Color.BLACK;
 	}
 }
