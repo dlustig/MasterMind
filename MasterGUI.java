@@ -27,9 +27,9 @@ public class MasterGUI extends JFrame
 		JPanel menu = new JPanel();
 		menu.setLayout(org2);
 		guessBox.setSize(new Dimension(200,50));
-		guessBox.setFont(textFont);
+		guessBox.setFont(TEXT_FONT);
 		submit.setSize(new Dimension(200,50));
-		submit.setFont(textFont);
+		submit.setFont(TEXT_FONT);
 		menu.add(guessBox,BorderLayout.NORTH);
 		menu.add(submit,BorderLayout.SOUTH);
 
