@@ -14,7 +14,9 @@ public class MasterGUI extends JFrame
 	JButton submit = new JButton("Guess!");
 	MasterMindBoard graphic;
 
-	public MasterGUI(int numGuesses)
+	//Constructor makes a JFrame, adds the guess menu, and the board
+	//needs the number of guesses for this game and an object to register button clicks
+	public MasterGUI(int numGuesses, String correctGuess, ActionListener listener)
 	{
 		super("MasterMind");
 
@@ -32,8 +34,9 @@ public class MasterGUI extends JFrame
 		submit.setFont(TEXT_FONT);
 		menu.add(guessBox,BorderLayout.NORTH);
 		menu.add(submit,BorderLayout.SOUTH);
+		submit.addActionListener(listener);
 
-		graphic = new MasterMindBoard(numGuesses);
+		graphic = new MasterMindBoard(numGuesses, correctGuess);
 
 		//sets the values for the window
 		setLayout(org);
@@ -41,28 +44,44 @@ public class MasterGUI extends JFrame
 		setResizable(false);
 		setSize(400,600);
 		add(menu,BorderLayout.NORTH);
-		//add(guessBox);
 		add(graphic);
 		setVisible(true);
 	}
 
-	public void submitFeedback(String guess, int numRight, int numClose)
+	public void gameOver()
 	{
-		graphic.registerGuess(guess,numRight,numClose);
+		submit.setEnabled(false);
+		guessBox.setEnabled(false);
+		graphic.gameOver();
+	}
+
+	//returns what is currently in the textbox
+	public String getGuess()
+	{
+		return guessBox.getText();
+	}
+
+	//registers the guess with the MasterMindBoard and resets the textbox
+	public void submitFeedback(int numRight, int numClose)
+	{
+		graphic.registerGuess(guessBox.getText().toUpperCase(),numRight,numClose);
 		guessBox.setText("");
 	}
 
+	//used for demoing the board
 	public static void main(String[] args)
 	{
-		MasterGUI obj = new MasterGUI(8);
-		while(true)
+		int numGuess = 8;
+		MasterGUI obj = new MasterGUI(numGuess,"ABCD",null);
+		for(int y = 0; y < numGuess; y++)
 		{
-			for(int x = 0; x<10000;x++)
+			for(int x = 0; x<30000;x++)
 			{
 				System.out.println(".");
 			}
-			obj.submitFeedback("ADCA",1,2);
+			obj.submitFeedback(1,2);
 			obj.repaint();
 		}
+		obj.gameOver();
 	}
 }
