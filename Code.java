@@ -10,6 +10,7 @@ public class Code{
 		if(c.length()!=4) {
 			return false;
 		}
+		c.toUpperCase();
 		for(int i=0; i<4; i++) {
 			if(c.charAt(i)>alfSize+64 || c.charAt(i)<65) {
 				return false;
