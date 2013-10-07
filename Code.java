@@ -100,7 +100,7 @@ public class Code{
 		if(a<1 || a>26) {
 			return false;
 		} else {
-			alfSize=size;
+			alfSize=a;
 			return true;
 		}
 	}
