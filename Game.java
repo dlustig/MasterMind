@@ -5,26 +5,26 @@ public class Game{
                 String stringcode = new String();
                 int alphsize;
                 Scanner in = new Scanner(System.in);
-                
+
                 System.out.println("Enter the size of the alphabet: ");
                 alphsize = in.nextInt();
                 while(!CorrectCode.setAlf(alphsize)){
                     alphsize = in.nextInt();
                 }
-                
+
                 System.out.println("Enter the correct code: ");
                 stringcode = in.next();
                 while(!CorrectCode.setCode(stringcode)){
                    stringcode = in.next();
                 }
-                
+
                 System.out.println("Enter the number of round: ");
                 int numRounds = in.nextInt();
-                
+
                 ActionList buttoncheck = new ActionList();
-                
+
                 MasterGUI gameBoard = new MasterGUI(numRounds, stringcode, buttoncheck);
-		
+
 		boolean won = false;
                 int numRight;
                 int numIn;
@@ -33,32 +33,34 @@ public class Game{
 		System.out.println("Start guessing!");
 		while(won==false && onRound<numRounds)
 		{
-                        
+
                         if(buttoncheck.buttonpushed){
-                    
-                              stringcode = gameBoard.getGuess();
-                              //while(!GuessCode.setCode(stringcode)){
-                                // stringcode = gameBoard.getGuess();
-                            //}
-                            won=CorrectCode.won(GuessCode);
-                            numRight = CorrectCode.corrects(GuessCode);
-                            numIn = CorrectCode.ins(GuessCode);
-                            gameBoard.submitFeedback(numRight, numIn);
-                            onRound++;
+
+                            stringcode = gameBoard.getGuess();
+                            if(GuessCode.setCode(stringcode)){
+                                 stringcode = gameBoard.getGuess();
+                            	won=CorrectCode.won(GuessCode);
+                            	numRight = CorrectCode.corrects(GuessCode);
+                            	numIn = CorrectCode.ins(GuessCode);
+                           		gameBoard.submitFeedback(numRight, numIn);
+                            	onRound++;
+							}
                             buttoncheck.buttonback();
                         }
-                       
-                        
+
+
 		}
 		if(won==true)
 		{
 			System.out.println("Codebreaker wins!");
+			gameBoard.gameOver();
 		} else {
 			System.out.println("Codemaker wins!");
+			gameBoard.gameOver();
 		}
 	}
-	
-	
+
+
 }
 /*
 scrap all that

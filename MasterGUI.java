@@ -59,7 +59,7 @@ public class MasterGUI extends JFrame
 	//returns what is currently in the textbox
 	public String getGuess()
 	{
-		return guessBox.getText();
+		return guessBox.getText().toUpperCase();
 	}
 
 	//registers the guess with the MasterMindBoard and resets the textbox
