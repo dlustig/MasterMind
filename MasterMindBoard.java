@@ -8,6 +8,8 @@ import java.awt.event.*;
 //class represents a JPanel with a master-mind-board drawn on it.
 class MasterMindBoard extends JPanel
 {
+	final static Font DIRECTION_FONT = new Font("Arial",Font.BOLD,12);
+
 	final static int BOARD_HEIGHT = 500;
 	final static int BOARD_WIDTH = 200;
 	final static int FIRST_ROW_OFFSET = 25;
@@ -33,15 +35,6 @@ class MasterMindBoard extends JPanel
 		rowSpace = 425 / numGuesses;
 		numCorrect = new int [numGuesses];
 		numClose = new int [numGuesses];
-		/*prevGuesses.add("ABCD");
-		prevGuesses.add("DVBA");
-		prevGuesses.add("ADDA");
-		numCorrect[0] = 1;
-		numCorrect[1] = 0;
-		numCorrect[2] = 2;
-		numClose[0] = 1;
-		numClose[1] = 2;
-		numClose[2] = 2;*/
 		gameOver = false;
 	}
 
@@ -49,7 +42,8 @@ class MasterMindBoard extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		drawBoard(g,100,30);
+		drawBoard(g,100,15);
+		paintDirections(g,117,30 + BOARD_HEIGHT);
 	}
 
 	//stores the information of a guess, so that the board can display the appropriate images
@@ -113,6 +107,8 @@ class MasterMindBoard extends JPanel
 			paintGuess(g,x,500-y,"????");
 		}
 
+		//return the graphics object to its original orientation
+		g.translate(-xOffset,-yOffset);
 	}
 
 	//paints one "empty" row of the gameboard
@@ -157,5 +153,26 @@ class MasterMindBoard extends JPanel
 		if(numPeg <= numRight + numClose)
 			return Color.WHITE;
 		return Color.BLACK;
+	}
+
+	//Prints the directions for what the board means
+	private void paintDirections(Graphics g,  int xOffset, int yOffset)
+	{
+		g.setFont(DIRECTION_FONT);
+
+		//paint Background
+		g.setColor(Color.GREEN);
+		g.fillRect(xOffset-5,yOffset,175,34);
+
+		//paint peg representations
+		g.setColor(getColor(1,0,1));
+		g.fillOval(xOffset,yOffset + 4,6,6);
+		g.setColor(getColor(0,1,1));
+		g.fillOval(xOffset,yOffset + 20,6,6);
+
+		//paint words
+		g.setColor(Color.BLACK);
+		g.drawString("= correct color and place",xOffset + 8,yOffset + 12);
+		g.drawString("= correct color, wrong place",xOffset + 8,yOffset + 28);
 	}
 }
