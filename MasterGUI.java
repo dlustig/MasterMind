@@ -53,6 +53,7 @@ public class MasterGUI extends JFrame
 		submit.setEnabled(false);
 		guessBox.setEnabled(false);
 		graphic.gameOver();
+		repaint();
 	}
 
 	//returns what is currently in the textbox
@@ -66,6 +67,7 @@ public class MasterGUI extends JFrame
 	{
 		graphic.registerGuess(guessBox.getText().toUpperCase(),numRight,numClose);
 		guessBox.setText("");
+		repaint();
 	}
 
 	//used for demoing the board
@@ -80,7 +82,7 @@ public class MasterGUI extends JFrame
 				System.out.println(".");
 			}
 			obj.submitFeedback(1,2);
-			obj.repaint();
+			//obj.repaint();
 		}
 		obj.gameOver();
 	}
