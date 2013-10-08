@@ -15,13 +15,13 @@ public class Game{
 
                 System.out.println("Enter the correct code: ");
 				Console console = System.console();
-				stringcode = console.readPassword();
+				stringcode = new String(console.readPassword());
                 //stringcode = in.next();
                 while(!CorrectCode.setCode(stringcode)){
-					stringcode = console.readPassword();
+					stringcode = new String(console.readPassword());
                 }
 
-                System.out.println("Enter the number of round: ");
+                System.out.println("Enter the number of rounds: ");
                 int numRounds = in.nextInt();
 
                 ActionList buttoncheck = new ActionList();

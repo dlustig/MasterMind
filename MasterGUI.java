@@ -35,6 +35,7 @@ public class MasterGUI extends JFrame
 		menu.add(guessBox,BorderLayout.NORTH);
 		menu.add(submit,BorderLayout.SOUTH);
 		submit.addActionListener(listener);
+		submit.setMnemonic(KeyEvent.VK_ENTER);//The constant value for the carriage return (enter)
 
 		graphic = new MasterMindBoard(numGuesses, correctGuess);
 
@@ -67,6 +68,7 @@ public class MasterGUI extends JFrame
 	{
 		graphic.registerGuess(guessBox.getText().toUpperCase(),numRight,numClose);
 		guessBox.setText("");
+		guessBox.requestFocus();
 		repaint();
 	}
 

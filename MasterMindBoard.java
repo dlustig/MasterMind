@@ -31,7 +31,7 @@ class MasterMindBoard extends JPanel
 	public MasterMindBoard(int pNumGuesses, String pCorrectGuess)
 	{
 		numGuesses = pNumGuesses;
-		correctGuess = pCorrectGuess;
+		correctGuess = pCorrectGuess.toUpperCase();
 		rowSpace = 425 / numGuesses;
 		numCorrect = new int [numGuesses];
 		numClose = new int [numGuesses];
