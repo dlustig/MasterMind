@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.Console;
 public class Game{
 	public static void main(String args[]){
                 Code CorrectCode = new Code();
@@ -13,9 +14,11 @@ public class Game{
                 }
                 
                 System.out.println("Enter the correct code: ");
-                stringcode = in.next();
+				Console console = System.console();
+				stringcode = console.readPassword();
+                //stringcode = in.next();
                 while(!CorrectCode.setCode(stringcode)){
-                   stringcode = in.next();
+					stringcode = console.readPassword();
                 }
                 
                 System.out.println("Enter the number of round: ");
