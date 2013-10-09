@@ -1,9 +1,0 @@
-This is a quick note about the implementation of the graphical interface.
-
--All that is required of the using code up front is the creation of a MasterGUI object. The object needs the number of guesses, the correct guess, and an object which implements the "ActionListener" interface. The object will call the actionPerformed(ActionEvent) method of the implementing object. The only ActionEvent which could possibly be passed in is the clicking of the guess button.
-
--During the game, use the "submitFeedback(int numCorrect, int numClose)" method. This will read the text in the box, clear it, and tell the board wht to draw.
-
--The board takes care of drawing all the guesses, but it is up to the game logic class to call the "gameOver()" method of the MasterGUI object when the game is over. (it should do this AFTER registering the guess).
-
--There is no need to bother with the "MasterMindBoard" class. he MasterGUI class does everything you need, if you implement the above steps.
