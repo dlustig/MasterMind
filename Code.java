@@ -20,11 +20,6 @@ public class Code{
 	}
 
 	/*
-	*
-	*
-	*/
-
-	/*
 	* Set the code string attribute of a Code object
 	* @param a a string to set the code string to
 	* @return a boolean which indicates whether the input string was valid
