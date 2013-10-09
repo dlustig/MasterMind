@@ -12,7 +12,12 @@ public class Game{
                 System.out.println("Enter the size of the alphabet: ");
                 alphsize = in.nextInt();
                 while(!CorrectCode.setAlf(alphsize)){
-                    alphsize = in.nextInt();
+                    try {alphsize = in.nextInt();}
+                    
+                    catch(Exception e){
+                    	continue;
+                    }
+                    
                 }
 
                 System.out.println("Enter the correct code: ");
@@ -24,7 +29,16 @@ public class Game{
                 }
 
                 System.out.println("Enter the number of rounds: ");
-                int numRounds = in.nextInt();
+                int numRounds = 0;
+                while(numRounds <= 0)
+                {
+                	try{numRounds = in.nextInt();}
+                	
+                	catch(Exception q){
+                		continue;
+                		
+                	}
+                }
 
                 ActionList buttoncheck = new ActionList();
 		
