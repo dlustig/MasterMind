@@ -13,20 +13,20 @@ public class Game{
                 alphsize = in.nextInt();
                 while(!CorrectCode.setAlf(alphsize)){
                     try {alphsize = in.nextInt();}
-                    
+
                     catch(Exception e){
                     	in.nextLine();
                     	continue;
                     }
-                    
+
                 }
 
                 System.out.println("Enter the correct code: ");
 				Console console = System.console();
-				stringcode = new String(console.readPassword());
+				stringcode = new String(console.readPassword()).toUpperCase();
                 //stringcode = in.next();
                 while(!CorrectCode.setCode(stringcode)){
-					stringcode = new String(console.readPassword());
+					stringcode = new String(console.readPassword()).toUpperCase();
                 }
 
                 System.out.println("Enter the number of rounds: ");
@@ -34,16 +34,16 @@ public class Game{
                 while(numRounds <= 0)
                 {
                 	try{numRounds = in.nextInt();}
-                	
+
                 	catch(Exception q){
                 		in.nextLine();
                 		continue;
-                		
+
                 	}
                 }
 
                 ActionList buttoncheck = new ActionList();
-		
+
 		//uses the information enetered by the codemaker to create the game gui
                 MasterGUI gameBoard = new MasterGUI(numRounds, stringcode, buttoncheck);
 
@@ -53,7 +53,7 @@ public class Game{
 		int onRound=0;
 		Code GuessCode = new Code();
 		System.out.println("Start guessing!");
-		
+
 		//The game Looop
 		while(won==false && onRound<numRounds)
 		{
@@ -61,9 +61,9 @@ public class Game{
                         if(buttoncheck.buttonpushed){
 
                             stringcode = gameBoard.getGuess();
-                            
+
                             //only accept the guess if it is valid
-                            if(GuessCode.setCode(stringcode)){		
+                            if(GuessCode.setCode(stringcode)){
                                  stringcode = gameBoard.getGuess();
                             	won=CorrectCode.won(GuessCode);
                             	numRight = CorrectCode.corrects(GuessCode);

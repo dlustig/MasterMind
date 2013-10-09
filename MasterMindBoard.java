@@ -179,7 +179,7 @@ class MasterMindBoard extends JPanel
 
 		//paint words
 		g.setColor(Color.BLACK);
-		g.drawString("= correct color and place",xOffset + 8,yOffset + 12);
-		g.drawString("= correct color, wrong place",xOffset + 8,yOffset + 28);
+		g.drawString("= correct letter and place",xOffset + 8,yOffset + 12);
+		g.drawString("= correct letter, wrong place",xOffset + 8,yOffset + 28);
 	}
 }
