@@ -6,13 +6,13 @@ import java.awt.event.*;
 
 public class MasterGUI extends JFrame
 {
-
+	//fonts
 	final static Font TEXT_FONT = new Font("arial",Font.BOLD,16);
 	final static Font MESSAGE_FONT = new Font("arial",Font.BOLD,12);
 
-	JTextField guessBox = new JTextField(5);
-	JButton submit = new JButton("Guess!");
-	MasterMindBoard graphic;
+	private JTextField guessBox = new JTextField(5);
+	private JButton submit = new JButton("Guess!");
+	private MasterMindBoard graphic;
 
 	//Constructor makes a JFrame, adds the guess menu, and the board
 	//needs the number of guesses for this game and an object to register button clicks
@@ -73,9 +73,9 @@ public class MasterGUI extends JFrame
 	}
 
 	//used for demoing the board
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
-		int numGuess = 8;
+		int numGuess = 30000;
 		MasterGUI obj = new MasterGUI(numGuess,"ABCD",null);
 		for(int y = 0; y < numGuess; y++)
 		{
@@ -87,5 +87,5 @@ public class MasterGUI extends JFrame
 			//obj.repaint();
 		}
 		obj.gameOver();
-	}
+	}*/
 }

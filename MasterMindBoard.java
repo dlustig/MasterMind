@@ -8,13 +8,23 @@ import java.awt.event.*;
 //class represents a JPanel with a master-mind-board drawn on it.
 class MasterMindBoard extends JPanel
 {
+
+	//Font
 	final static Font DIRECTION_FONT = new Font("Arial",Font.BOLD,12);
 
+
+	//board dimensions
 	final static int BOARD_HEIGHT = 500;
 	final static int BOARD_WIDTH = 200;
 	final static int FIRST_ROW_OFFSET = 25;
 	final static int SIDE_OFFSET = 35;
 	final static int RESULTS_OFFSET = 6;
+
+
+	//colors
+	final static Color boardColor = new Color(100,150,150);
+	final static Color holeColor = new Color(10,10,10);
+	final static Color guessedCode = new Color(200,50,25);
 
 	private boolean gameOver = false;
 	private int numGuesses = 1;
@@ -24,9 +34,6 @@ class MasterMindBoard extends JPanel
 	private int[] numClose;
 	private String correctGuess = "????";
 
-	final static Color boardColor = new Color(100,150,150);
-	final static Color holeColor = new Color(10,10,10);
-	final static Color guessedCode = new Color(200,50,25);
 
 	public MasterMindBoard(int pNumGuesses, String pCorrectGuess)
 	{
